@@ -1,0 +1,24 @@
+<h3>Create Task Form</h3>
+<form [formGroup]="taskCreateForm" (ngSubmit)="addTask()" class="form-group">
+    <div class="form-group">
+        <input type="text" id="name" name="name" formControlName="name" class="form-control" placeholder="Task Name">
+        <div *ngIf="taskCreateForm.get('name').hasError('required') && taskCreateForm.get('name').dirty"
+            class="alert alert-danger">Task Name required</div>
+    </div>
+    <div class="form-group">
+        <input type="text" id="description" name="description" formControlName="description" class="form-control"
+            placeholder="description">
+        <div *ngIf="taskCreateForm.get('description').hasError('required') && taskCreateForm.get('description').dirty"
+            class="alert alert-danger"> description required</div>
+    </div>
+   <div class="form-group">
+        <select class="form-control" formControlName="categoryId" name="categoryId" id="categoryId">
+            <option *ngFor="let category of categories" [ngValue]="category.id">{{category.name}}</option>
+        </select>
+        <div *ngIf="taskCreateForm.get('categoryId').hasError('required') && taskCreateForm.get('categoryId').touched"
+            class="alert alert-danger"> Kategori gereklidir</div>
+    </div>    
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button type="submit" class="btn btn-primary" [disabled]="taskCreateForm.invalid">Create Task</button>
+      </div>
+</form>
